@@ -11,6 +11,15 @@
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.dashboard');
 });
+
+Auth::routes();
+
+Route::resource('admin/capability','Admin\CapabilityController');
+Route::resource('admin/company','Admin\CompanyController',['except' => 'show']);
+Route::resource('admin/country','Admin\CountryController');
+
+
