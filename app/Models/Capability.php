@@ -9,7 +9,7 @@ class Capability extends Model
     //
     protected $table = 'capabilities';
 
-    protected $fillable = ['title','status'];
+    protected $fillable = ['title','slug','status'];
 
     public function roles()
     {

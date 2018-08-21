@@ -10,6 +10,17 @@
 </div>
 
 <div class="form-group">
+  {{ Form::label('slug','Slug',['for'=>'slug']) }}
+  {!! Form::text('slug',null,array('class'=>'form-control','placeholder'=>'Enter slug')) !!}
+
+   @if ($errors->has('slug'))
+    <span class="invalid-feedback" role="alert">
+       <strong>{{ $errors->first('slug') }}</strong>
+    </span>
+    @endif        
+</div>
+
+<div class="form-group">
    {{ Form::label('status','Status',['for'=>'status']) }}
    {{ Form::radio('status', 1 , true) }}Active
    {{ Form::radio('status',0, false)}}Inactive

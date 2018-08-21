@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->enum('salutation',['mr', 'mrs']);
             $table->string('password');
             $table->string('country')->nullable();
-            $table->string('confiramtion_token')->nullable();
+            $table->string('confirmation_token')->nullable();
             $table->datetime('confirmed_at')->nullable();
             $table->integer('company_id')->unsigned()->nullable();
             $table->integer('role_id')->unsigned();

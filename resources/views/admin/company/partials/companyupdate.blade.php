@@ -14,13 +14,13 @@
 </div>
 
 <div class="form-group">
-   {{ Form::label('telephone','Company Address',['for'=>'telephone']) }}
+   {{ Form::label('telephone','Telephone No',['for'=>'telephone']) }}
    {!! Form::text('telephone',null,array('class'=>'form-control')) !!}
 </div>
 
  <div class="form-group">
   {{ Form::label('status','Status') }}
-  @if( $country->status == 1)
+  @if( $company->status == 1)
   {{ Form::radio('status', 1 , true) }}Active
   {{ Form::radio('status',0 , false)}}Inactive
   @else

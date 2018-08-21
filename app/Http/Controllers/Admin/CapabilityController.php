@@ -50,6 +50,7 @@ class CapabilityController extends Controller
     {
         $capabilities = Capability::create($request->only([
             'title',
+            'slug',
             'status'
         ]));
 

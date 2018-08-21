@@ -8,5 +8,5 @@ class Country extends Model
 {
     protected $table = 'countries';
 
-    protected $fillable = ['name','country_code','status'];
+    protected $fillable = ['name','country_code'];
 }
