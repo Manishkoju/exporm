@@ -1,7 +1,12 @@
 <div class="form-group">
    {{ Form::label('title','Title',['for'=>'title']) }}
    {!! Form::text('title',null,array('class'=>'form-control','placeholder'=>'Enter Capability Title ')) !!}
-   <div class="error">{{ $errors->first('title') }}</div>
+
+    @if ($errors->has('title'))
+    <span class="invalid-feedback" role="alert">
+       <strong>{{ $errors->first('title') }}</strong>
+    </span>
+    @endif
 </div>
 
 <div class="form-group">

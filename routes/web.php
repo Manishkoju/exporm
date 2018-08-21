@@ -12,14 +12,17 @@
 */
 
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
+// Route::get('/', function () {
+//     return view('admin.dashboard');
+// });
 
 Auth::routes();
-
-Route::resource('admin/capability','Admin\CapabilityController');
-Route::resource('admin/company','Admin\CompanyController',['except' => 'show']);
-Route::resource('admin/country','Admin\CountryController');
+Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
+   Route::resource('capability','Admin\CapabilityController');
+   Route::resource('company','Admin\CompanyController',['except' => 'show']);
+   Route::resource('country','Admin\CountryController');
+   Route::resource('role','Admin\RoleController');
+   Route::resource('company/user','Admin\CompanyAdminController');
+});
 
 

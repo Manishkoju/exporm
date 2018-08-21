@@ -1,6 +1,4 @@
 @extends('admin.layout.base')
-@section('title','Create Capability')
-@section('content')
 @section('title','Company List')
 @section('content')
 <table class="table table-bordered ">                                                                                   

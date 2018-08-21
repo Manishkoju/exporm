@@ -1,6 +1,7 @@
 <div class="form-group">
    {{ Form::label('name','Name',['for'=>'name']) }}
    {{ Form::text('name',null,array('class'=>'form-control','placeholder'=>'Enter Company Name ')) }}
+   
 </div>
 
 <div class="form-group">
@@ -14,8 +15,8 @@
 </div>
 
 <div class="form-group">
-   {{ Form::label('telephone','Company Address',['for'=>'telephone']) }}
-   {!! Form::textarea('telephone',null,array('class'=>'form-control')) !!}
+   {{ Form::label('telephone','Company Telephone',['for'=>'telephone']) }}
+   {!! Form::number('telephone',null,array('class'=>'form-control')) !!}
 </div>
 
 <div class="form-group">

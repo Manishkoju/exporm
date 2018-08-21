@@ -4,7 +4,7 @@
 @section('content')
 {!! Form::model($capability, [
     'method' => 'PUT',
-    'route' => ['admin.capability.update', $capability->id,],
+    'route' => ['capability.update', $capability->id,],
     'files'=>true
 ]) !!}
    @include('admin.capability.partials.capabilityupdate')

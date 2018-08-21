@@ -2,24 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Country;
-use App\Http\Requests\CountryStoreRequest;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Session;
 
-class CountryController extends Controller
-{  
-     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
+class CompanyAdminController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +16,6 @@ class CountryController extends Controller
     public function index()
     {
         //
-        return view('admin.country.index');
     }
 
     /**
@@ -37,27 +24,20 @@ class CountryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-        $countries = Country::orderBy('id','DESC')->get();
-        return view('admin.country.create',compact('countries'));
+    {   
+        $companies = Company::all();
+        return view('admin.companyadmin.create',compact('companies'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param   App\Http\Requests\CountryStoreRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CountryStoreRequest $request)
+    public function store(Request $request)
     {
-        $country = Country::create($request->only([
-            'name',
-            'status'
-        ]));
-
-        Session::flash('message','New Country Added ');
-        return redirect()->back();
+        //
     }
 
     /**
@@ -79,8 +59,7 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::findOrFail($id);
-        return view('admin.country.edit',compact('country'));
+        //
     }
 
     /**
@@ -92,14 +71,7 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $country = Country::find($id);
-        $country->fill([
-            'name' => $request->name,
-            'status'=> $request->status
-        ])->save();
-
-        Session::flash('message','Company Updated ');
-        return redirect('admin/country/create');
+        //
     }
 
     /**
@@ -111,10 +83,5 @@ class CountryController extends Controller
     public function destroy($id)
     {
         //
-        $company = Country::findOrFail($id);
-        $company->delete();
-
-        Session::flash('message','Country Deleted ');
-        return redirect()->back();
     }
 }

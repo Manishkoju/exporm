@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Country;
-use App\Http\Requests\CountryStoreRequest;
+use App\Models\Role;
+use App\Models\Capability;
+use App\Models\RoleCapability;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
 
-class CountryController extends Controller
-{  
+class RoleController extends Controller
+{   
      /**
      * Create a new controller instance.
      *
@@ -28,7 +29,6 @@ class CountryController extends Controller
     public function index()
     {
         //
-        return view('admin.country.index');
     }
 
     /**
@@ -38,26 +38,35 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
-        $countries = Country::orderBy('id','DESC')->get();
-        return view('admin.country.create',compact('countries'));
+        $roles = Role::all();
+        $capabilities = Capability::where('status',1)->get();
+
+        return view('admin.role.create',compact('roles','capabilities'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param   App\Http\Requests\CountryStoreRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CountryStoreRequest $request)
+    public function store(Request $request)
     {
-        $country = Country::create($request->only([
-            'name',
-            'status'
-        ]));
-
-        Session::flash('message','New Country Added ');
-        return redirect()->back();
+       $role = Role::create($request->only([
+                'name',
+                'slug',
+                'status'
+              ]));
+       
+       // foreach ($request->capability as $key => $value) {
+       //    RoleCapability::create([
+       //      'role_id'=> $role->id,
+       //      'capability_id'=> $value
+       //    ]);
+       // }
+       $role->capabilities()->sync($request->capability);
+       Session::flash('message','New Role Added ');
+       return redirect()->back();
     }
 
     /**
@@ -79,8 +88,9 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::findOrFail($id);
-        return view('admin.country.edit',compact('country'));
+        //
+        $role = Role::findOrFail($id);
+        return view('admin.role.edit',compact('role'));
     }
 
     /**
@@ -92,14 +102,7 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $country = Country::find($id);
-        $country->fill([
-            'name' => $request->name,
-            'status'=> $request->status
-        ])->save();
-
-        Session::flash('message','Company Updated ');
-        return redirect('admin/country/create');
+        //
     }
 
     /**
@@ -111,10 +114,5 @@ class CountryController extends Controller
     public function destroy($id)
     {
         //
-        $company = Country::findOrFail($id);
-        $company->delete();
-
-        Session::flash('message','Country Deleted ');
-        return redirect()->back();
     }
 }
