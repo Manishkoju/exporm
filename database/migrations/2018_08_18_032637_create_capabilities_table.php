@@ -15,7 +15,8 @@ class CreateCapabilitiesTable extends Migration
     {
         Schema::create('capabilities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('title')->unique();
+            $table->string('slug')->unique();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
